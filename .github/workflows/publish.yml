@@ -1,7 +1,6 @@
 name: Publish Base Image
 
-on:
-  workflow_dispatch:
+on: [push, workflow_dispatch]
 
 env:
   DOCKER_REGISTRY: ghcr.io
@@ -53,5 +52,5 @@ jobs:
           tags: ${{ steps.metadata.outputs.tags}}
           labels: ${{ steps.metadata.outputs.labels }}
           push: true
-          file: Dockerfile
+          file: ./python-flask-dev/Dockerfile
           target: ${{matrix.flavour}}
