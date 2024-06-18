@@ -49,9 +49,9 @@ jobs:
       - name: Build and push docker image
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: ./python-flask-dev/
           tags: ${{ steps.metadata.outputs.tags}}
           labels: ${{ steps.metadata.outputs.labels }}
           push: true
-          file: ./python-flask-dev/Dockerfile
+          file: Dockerfile
           target: ${{matrix.flavour}}
