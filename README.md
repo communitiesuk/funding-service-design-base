@@ -13,3 +13,4 @@ Contains requirements files for different versions of a python flask app. The [D
 - Make the workflow just use all tags in the tags file, not hard code them?
 - If we add other base images besides [python-flask-dev](./python-flask-dev/), make the workflow use a matrix approach so it builds all of these?
 - Are we using the right tag names?
+- Stop using pip-compile and use rye?
