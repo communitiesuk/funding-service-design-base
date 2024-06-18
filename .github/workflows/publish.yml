@@ -1,7 +1,6 @@
 name: Publish Base Image
 
-on:
-  workflow_dispatch:
+on: [push, workflow_dispatch]
 
 env:
   DOCKER_REGISTRY: ghcr.io
@@ -11,8 +10,11 @@ jobs:
   docker-build:
     strategy: 
       matrix:
-        flavour: ["vanilla", "frontend"]
+        flavour: ["flask", "frontend"]
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./python-flask-dev
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -21,8 +23,9 @@ jobs:
         id: set-tags
         run: |
           source tags
-          echo "PYTHON_FLASK_DEV_VANILLA=$PYTHON_FLASK_DEV" >> $GITHUB_ENV
-          echo "PYTHON_FLASK_DEV_FRONTEND=$PYTHON_FLASK_DEV_FRONTEND" >> $GITHUB_ENV
+          echo "PYTHON_FLASK_DEV_PYTHON=$PYTHON_FLASK_DEV_PY" >> $GITHUB_ENV
+          echo "PYTHON_FLASK_DEV_FLASK=$PYTHON_FLASK_DEV_FLASK" >> $GITHUB_ENV
+          echo "PYTHON_FLASK_DEV_FRONTEND=$PYTHON_FLASK_DEV_JINJA" >> $GITHUB_ENV
 
       - name: Docker metadata
         id: metadata
@@ -32,8 +35,9 @@ jobs:
           tags: |
             type=sha,format=long
             type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
-            type=raw,value=${{env.PYTHON_FLASK_DEV_VANILLA}},enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
-            type=raw,value=${{env.PYTHON_FLASK_DEV_FRONTEND}},enable=(${{ (github.ref == format('refs/heads/{0}', 'main')) && (matrix.flavour == 'frontend') }})
+            type=raw,value=${{env.PYTHON_FLASK_DEV_PYTHON}},enable=${{ github.ref == format('refs/heads/{0}', 'main')}}
+            type=raw,value=${{env.PYTHON_FLASK_DEV_FLASK}},enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
+            type=raw,value=${{env.PYTHON_FLASK_DEV_FRONTEND}},enable=${{ (github.ref == format('refs/heads/{0}', 'main')) && (matrix.flavour == 'frontend') }}
             type=ref,event=branch
 
       - name: Log in to the Container registry
@@ -46,8 +50,9 @@ jobs:
       - name: Build and push docker image
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: ./python-flask-dev/
           tags: ${{ steps.metadata.outputs.tags}}
           labels: ${{ steps.metadata.outputs.labels }}
           push: true
           file: ./python-flask-dev/Dockerfile
+          target: ${{matrix.flavour}}
