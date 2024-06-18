@@ -35,7 +35,7 @@ jobs:
           tags: |
             type=sha,format=long
             type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
-            type=raw,value=${{env.PYTHON_FLASK_DEV_VANILLA}},enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
+            type=raw,value=${{env.PYTHON_FLASK_DEV_VANILLA}},enable=${{ github.ref == format('refs/heads/{0}', 'main')&& (matrix.flavour == 'vanilla') }}
             type=raw,value=${{env.PYTHON_FLASK_DEV_FRONTEND}},enable=${{ (github.ref == format('refs/heads/{0}', 'main')) && (matrix.flavour == 'frontend') }}
             type=ref,event=branch
 
@@ -54,3 +54,4 @@ jobs:
           labels: ${{ steps.metadata.outputs.labels }}
           push: true
           file: ./python-flask-dev/Dockerfile
+          target: ${{matrix.flavour}}
