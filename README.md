@@ -1,5 +1,5 @@
 # funding-service-design-base
-Base images and requirements definitions for funding service design apps.
+Base images and requirements definitions for development of funding service design apps. These images are not used in production as those ones are build using Paketo.
 
 ## Python Flask Dev
 Contains requirements files for different versions of a python flask app. The [Dockerfile](./python-flask-dev/Dockerfile) contains the following build targets:
