@@ -23,7 +23,7 @@ RUN pip install --upgrade pip && pip install -r requirements-frontend.txt
 
 
 # --------------------------------------------------
-# Base image to build db images on - includes sqwl alchemy and connexion
+# Base image to build db images on - includes sql alchemy and connexion
 # --------------------------------------------------
 
 FROM flask as db
@@ -31,4 +31,3 @@ WORKDIR /app
 COPY requirements-db.txt requirements-db.txt
 RUN apt-get update && apt-get install -y lsb-release && apt-get clean all
 RUN pip install --upgrade pip && pip install -r requirements-db.txt
-# RUN apt-get install -y lsb-release && apt-get clean all
