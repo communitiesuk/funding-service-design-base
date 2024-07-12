@@ -26,6 +26,7 @@ jobs:
           echo "PYTHON_FLASK_DEV_PYTHON=$PYTHON_FLASK_DEV_PY" >> $GITHUB_ENV
           echo "PYTHON_FLASK_DEV_FLASK=$PYTHON_FLASK_DEV_FLASK" >> $GITHUB_ENV
           echo "PYTHON_FLASK_DEV_FRONTEND=$PYTHON_FLASK_DEV_JINJA" >> $GITHUB_ENV
+          echo "PYTHON_FLASK_DEV_DB=$PYTHON_FLASK_DEV_SQL_ALCHEMY" >> $GITHUB_ENV
 
       - name: Docker metadata
         id: metadata
