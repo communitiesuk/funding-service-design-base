@@ -30,3 +30,4 @@ FROM flask as db
 WORKDIR /app
 COPY requirements-db.txt requirements-db.txt
 RUN pip install --upgrade pip && pip install -r requirements-db.txt
+RUN apt-get install -y lsb-release && apt-get clean all
