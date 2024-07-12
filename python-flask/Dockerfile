@@ -23,10 +23,10 @@ RUN pip install --upgrade pip && pip install -r requirements-frontend.txt
 
 
 # --------------------------------------------------
-# Will hold config for building DB base image
+# Base image to build db images on - includes sql alchemy and connexion
 # --------------------------------------------------
 
-# FROM flask as db
-# WORKDIR /app
-# COPY requirements-db.txt requirements-db.txt
-# RUN pip install --upgrade pip && pip install -r requirements-db.txt
+FROM flask as db
+WORKDIR /app
+COPY requirements-db.txt requirements-db.txt
+RUN pip install --upgrade pip && pip install -r requirements-db.txt

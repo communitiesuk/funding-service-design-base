@@ -3,7 +3,7 @@ Base images and requirements definitions for development of funding service desi
 
 ## Python Flask Dev
 Contains requirements files for different versions of a python flask app. The [Dockerfile](./python-flask-dev/Dockerfile) contains the following build targets:
-- `flask`: Developer image based on python 3.10 bullseye, with Flask 3.0.3 installed on top, plus everything in [requirements-dev.txt](./python-flask-dev/requirements-dev.txt)
+- `flask`: Developer image based on python 3.10 bullseye, with Flask 3.0.3 installed on top, plus everything in [requirements-dev.txt](./python-flask/requirements-dev.txt)
 - `frontend`: Base on `flask` above, with everything from [requirements-frontend.txt](./python-flask-dev/requirements-frontend.txt) installed
 
 ## Workflows
@@ -11,6 +11,6 @@ Contains requirements files for different versions of a python flask app. The [D
 
 # Future Improvements
 - Make the workflow just use all tags in the tags file, not hard code them?
-- If we add other base images besides [python-flask-dev](./python-flask-dev/), make the workflow use a matrix approach so it builds all of these?
+- If we add other base images besides [python-flask](./python-flask/), make the workflow use a matrix approach so it builds all of these?
 - Are we using the right tag names?
 - Stop using pip-compile and use rye?

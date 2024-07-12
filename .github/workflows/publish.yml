@@ -10,11 +10,11 @@ jobs:
   docker-build:
     strategy: 
       matrix:
-        flavour: ["flask", "frontend"]
+        flavour: ["flask", "frontend", "db"]
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./python-flask-dev
+        working-directory: ./python-flask
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -26,6 +26,7 @@ jobs:
           echo "PYTHON_FLASK_DEV_PYTHON=$PYTHON_FLASK_DEV_PY" >> $GITHUB_ENV
           echo "PYTHON_FLASK_DEV_FLASK=$PYTHON_FLASK_DEV_FLASK" >> $GITHUB_ENV
           echo "PYTHON_FLASK_DEV_FRONTEND=$PYTHON_FLASK_DEV_JINJA" >> $GITHUB_ENV
+          echo "PYTHON_FLASK_DEV_DB=$PYTHON_FLASK_DEV_SQL_ALCHEMY" >> $GITHUB_ENV
 
       - name: Docker metadata
         id: metadata
@@ -38,6 +39,7 @@ jobs:
             type=raw,value=${{env.PYTHON_FLASK_DEV_PYTHON}},enable=${{ github.ref == format('refs/heads/{0}', 'main')}}
             type=raw,value=${{env.PYTHON_FLASK_DEV_FLASK}},enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
             type=raw,value=${{env.PYTHON_FLASK_DEV_FRONTEND}},enable=${{ (github.ref == format('refs/heads/{0}', 'main')) && (matrix.flavour == 'frontend') }}
+            type=raw,value=${{env.PYTHON_FLASK_DEV_DB}},enable=${{ (github.ref == format('refs/heads/{0}', 'main')) && (matrix.flavour == 'db') }}
             type=ref,event=branch
 
       - name: Log in to the Container registry
@@ -50,9 +52,9 @@ jobs:
       - name: Build and push docker image
         uses: docker/build-push-action@v4
         with:
-          context: ./python-flask-dev/
+          context: ./python-flask/
           tags: ${{ steps.metadata.outputs.tags}}
           labels: ${{ steps.metadata.outputs.labels }}
           push: true
-          file: ./python-flask-dev/Dockerfile
+          file: ./python-flask/Dockerfile
           target: ${{matrix.flavour}}
