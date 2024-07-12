@@ -23,4 +23,4 @@ black==24.3.0
 #-----------------------------------
 #   Other Dev Dependencies
 #-----------------------------------
-beautifulsoup4==4.12.2
+beautifulsoup4==4.12.3
