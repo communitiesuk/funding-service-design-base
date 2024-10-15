@@ -51,6 +51,8 @@ flask-sqlalchemy==3.1.1
     # via
     #   -r requirements-db.in
     #   flask-migrate
+greenlet==3.1.1
+    # via sqlalchemy
 h11==0.14.0
     # via
     #   httpcore
@@ -167,7 +169,7 @@ sqlalchemy-json==0.7.0
     # via -r requirements-db.in
 sqlalchemy-utils==0.41.2
     # via -r requirements-db.in
-starlette==0.37.2
+starlette==0.40.0
     # via connexion
 swagger-ui-bundle==1.1.0
     # via
