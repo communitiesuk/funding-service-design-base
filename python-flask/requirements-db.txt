@@ -51,6 +51,8 @@ flask-sqlalchemy==3.1.1
     # via
     #   -r requirements-db.in
     #   flask-migrate
+greenlet==3.1.1
+    # via sqlalchemy
 h11==0.14.0
     # via
     #   httpcore
@@ -197,7 +199,7 @@ watchfiles==0.22.0
     # via uvicorn
 websockets==12.0
     # via uvicorn
-werkzeug==3.0.3
+werkzeug==3.0.6
     # via
     #   connexion
     #   flask
