@@ -51,6 +51,8 @@ flask-sqlalchemy==3.1.1
     # via
     #   -r requirements-db.in
     #   flask-migrate
+greenlet==3.1.1
+    # via sqlalchemy
 h11==0.14.0
     # via
     #   httpcore
@@ -119,7 +121,7 @@ psycopg2-binary==2.9.9
     # via -r requirements-db.in
 python-dotenv==1.0.1
     # via uvicorn
-python-multipart==0.0.9
+python-multipart==0.0.18
     # via connexion
 pyyaml==6.0.1
     # via
