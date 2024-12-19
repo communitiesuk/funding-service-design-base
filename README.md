@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This concept was superseded by reducing the number of apps and duplicated requirements. At the time of archiving these are https://github.com/communitiesuk/funding-service-pre-award-frontend and https://github.com/communitiesuk/funding-service-pre-award-stores
+
 # funding-service-design-base
 Base images and requirements definitions for development of funding service design apps. These images are not used in production as those ones are build using Paketo.
 
